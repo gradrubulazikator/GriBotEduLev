@@ -5,11 +5,11 @@ import (
 	"log"
 	"math/rand"
 	"time"
+        "GriBotEduLev/internal"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-const telegramBotToken = "7442090726:AAHH8K2wbk6gfxCAxOl1Vwbj_CPlKxlZD7Q"
 
 // Вопросы и ответы
 var questions = map[string]string{
@@ -26,7 +26,8 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	// Создание нового бота
-	bot, err := tgbotapi.NewBotAPI(telegramBotToken)
+	botToken := internal.BotToken // Получаем токен из config.go
+        bot, err := tgbotapi.NewBotAPI(botToken) // Используем botToken вместо telegramBotToken
 	if err != nil {
 		log.Fatalf("Ошибка создания бота: %v", err)
 	}
